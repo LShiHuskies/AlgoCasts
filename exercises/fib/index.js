@@ -8,25 +8,53 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {
-  // if (n === 0 || n === 1) {
-  //   return n
-  // } else {
-  //   return fib(n - 1) + fib(n - 2)
-  // }
-  const result = [0 , 1];
 
-  for (let i = 2; i <= n; i++) {
-    const a = result[result.length - 1];
-    const b = result[result.length - 2];
+function memoize(fn) {
+  const cache = {};
+  return function (...args) {
+    if (cache[args]) {
+      return cache[args];
+    }
 
-    result.push(a + b);
-  }
+    const result = fn.apply(this, args);
+    cache[args] = result;
 
-  return result[n];
+    return result;
+  };
 }
 
+function slowFib(n) {
+  if (n === 0 || n === 1) {
+      return n
+    }
+
+  return fib(n - 1) + fib(n - 2)
+}
+
+const fib = memoize(slowFib);
+
+
+
 module.exports = fib;
+
+
+// function fib(n) {
+//   // if (n === 0 || n === 1) {
+//   //   return n
+//   // } else {
+//   //   return fib(n - 1) + fib(n - 2)
+//   // }
+//   const result = [0 , 1];
+//
+//   for (let i = 2; i <= n; i++) {
+//     const a = result[result.length - 1];
+//     const b = result[result.length - 2];
+//
+//     result.push(a + b);
+//   }
+//
+//   return result[n];
+// }
 
 
 // function fib(n) {
