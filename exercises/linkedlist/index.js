@@ -77,9 +77,35 @@ class LinkedList {
       node = node.next;
     }
     previous.next = null;
+  }
+
+  insertLast(data) {
+    const last = this.getLast();
+
+    if (last) {
+      // There are some existing nodes in our chain
+      last.next = new Node(data);
+    } else {
+      // The chain is empty!
+      this.head = new Node(data);
+    }
 
   }
 
+  getAt(index) {
+  
+    let counter = 0;
+    let node = this.head;
+    while (node) {
+      if (counter === index) {
+        return node;
+      }
+
+      counter++;
+      node = node.next;
+    }
+    return null;
+  }
 
 
 }
