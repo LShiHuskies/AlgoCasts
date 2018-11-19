@@ -35,7 +35,6 @@ function weave(sourceOne, sourceTwo) {
     if (sourceTwo.peek()) {
       q.add(sourceTwo.remove());
     }
-
   }
 
   return q;
